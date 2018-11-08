@@ -10,17 +10,20 @@
 #include <stdlib.h>
 int main(void)
 {
-  //  int f = 4;
+    int a = 242;
     int X = (254 * 512);
     unsigned short y = 0xfffc;
     unsigned short z = 0xfffa;
     unsigned short x = 0x55;
-    int a = 242;
     unsigned short b = 1;
-     unsigned short c = 0;
-  //  int z = (241 * 512)-1;
-  //  int c = (242 * 512)-1;
-   // int d = (253 *  512)-1;
+    unsigned short c = 0;
+    unsigned short d = 0x00FE;
+    unsigned short e = 0x0001;
+    unsigned short f = 0x00FD;
+    unsigned short g = 0x000D;
+    unsigned short h = 1;
+    unsigned short i = 0x00C8;
+  
   
         FILE *fp = fopen("file.img", "wb");
         fseek(fp, X , SEEK_SET);
@@ -56,10 +59,41 @@ int main(void)
         fwrite(&c, sizeof(c), 1, fp);
     }
     
+    // filesystem creation
+    
+    
+    
+    for( int i=312;i<326;i++)
+    {
+        fwrite(&c, sizeof(c), 1, fp);
+    }
+    fwrite(&d, sizeof(d), 1, fp);
+    fwrite(&d, sizeof(d), 1, fp);
+    
+    fwrite(&e, sizeof(e), 1, fp);
+    fwrite(&e, sizeof(e), 1, fp);
+    
+    fwrite(&f, sizeof(f), 1, fp);
+    fwrite(&f, sizeof(f), 1, fp);
+    
+    fwrite(&g, sizeof(g), 1, fp);
+    fwrite(&g, sizeof(g), 1, fp);
+    
+    fwrite(&h, sizeof(h), 1, fp);
+    fwrite(&h, sizeof(h), 1, fp);
+   
+    fwrite(&i, sizeof(i), 1, fp);
+    fwrite(&i, sizeof(i), 1, fp);
+    
+
+    for( int i=338;i<768;i++)
+    {
+        fwrite(&c, sizeof(c), 1, fp);
+    }
+
         fclose(fp);
     return 0;
 
 
 }
- 
 
