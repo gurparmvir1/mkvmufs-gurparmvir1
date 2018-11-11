@@ -40,8 +40,8 @@ int main(void)
     int X = (254 * 512);
     unsigned short y = 0xfffc;
     unsigned short z = 0xfffa;
-    unsigned short x = 0x55;
-    unsigned short b = 1;
+    int x = 85;
+    unsigned short b = 0;
     unsigned short c = 0;
     unsigned short d = 0x00FE;
     unsigned short e = 0x0001;
@@ -51,18 +51,20 @@ int main(void)
     unsigned short i = 0x00C8;
     
     
-
     FILE *fp = fopen("file.img", "wb");
     fseek(fp, X , SEEK_SET);
-    for(int i=0;i<240;i++)
+    for(int i=0;i<241;i++)
     {
         fwrite(&y, sizeof(y), 1, fp);
     
     }
+    // printing 0xFFFA
     fwrite(&z, sizeof(z), 1, fp);
-    for(int i=241;i<253;i++)
+    
+    for(int i=242;i<254;i++)
     {
-        putc(a-1, fp);
+        unsigned short abc = a-1;
+        fwrite(&abc,sizeof(abc),1,fp);
         a++;
     }
     //writing 0xFFFA
@@ -70,21 +72,21 @@ int main(void)
     fwrite(&z, sizeof(z), 1, fp);
     
     //writing 0x55
-    for(int i=254;i<270;i++)
+    for(int i=256;i<272;i++)
     {
-          fwrite(&x, sizeof(x), 1, fp);
+        fputc(x, fp);
     }
-    // color values and code components sets to 1
-    fwrite(&b, sizeof(b), 1, fp);
-    fwrite(&b, sizeof(b), 1, fp);
-    fwrite(&b, sizeof(b), 1, fp);
-    fwrite(&b, sizeof(b), 1, fp);
-    fwrite(&b, sizeof(b), 1, fp);
+    // color values and code components sets to 0
+    fwrite(&b, 1, 1, fp);
+    fwrite(&b, 1, 1, fp);
+    fwrite(&b, 1, 1, fp);
+    fwrite(&b, 1, 1, fp);
+    fwrite(&b, 1, 1, fp);
     
     //set 27 bytes to 0
-    for(int i=276;i<303;i++)
+    for(int i=277;i<304;i++)
     {
-        fwrite(&c, sizeof(c), 1, fp);
+        fwrite(&c, 1, 1, fp);
     }
     
     // timestamps
@@ -97,40 +99,40 @@ int main(void)
     fwrite(&sec, sizeof(sec), 1, fp);
     fwrite(&wday, sizeof(wday), 1, fp);
     
-    //set 40 bytes to 0
+    //set 14 bytes to 0
     
-    for( int i=312;i<326;i++)
+    for( int i=311;i<325;i++)
     {
-        fwrite(&c, sizeof(c), 1, fp);
+        fwrite(&c, 1, 1, fp);
     }
     //writing 0x00FE
-    fwrite(&d, sizeof(d), 1, fp);
-    fwrite(&d, sizeof(d), 1, fp);
+    fwrite(&d, 2, 1, fp);
+    
     
     //writing 0x0001
-    fwrite(&e, sizeof(e), 1, fp);
-    fwrite(&e, sizeof(e), 1, fp);
+    fwrite(&e, 2, 1, fp);
+    
     
     //writing 0x00FD
-    fwrite(&f, sizeof(f), 1, fp);
-    fwrite(&f, sizeof(f), 1, fp);
+    fwrite(&f, 2, 1, fp);
+    
     
     //wrinting 0x000D
-    fwrite(&g, sizeof(g), 1, fp);
-    fwrite(&g, sizeof(g), 1, fp);
+    fwrite(&g, 2, 1, fp);
+    
     
     ////wrting 0-230 random
-    fwrite(&h, sizeof(h), 1, fp);
-    fwrite(&h, sizeof(h), 1, fp);
+    fwrite(&h, 2, 1, fp);
+    
    
     //writing 0x00C8
-    fwrite(&i, sizeof(i), 1, fp);
-    fwrite(&i, sizeof(i), 1, fp);
+    fwrite(&i, 2, 1, fp);
+    
     
     //set all bytes 430  to 0
-    for( int i=338;i<768;i++)
+    for( int i=337;i<767;i++)
     {
-        fwrite(&c, sizeof(c), 1, fp);
+        fwrite(&c, 1, 1, fp);
     }
     
         fclose(fp);
